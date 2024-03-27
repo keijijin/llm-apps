@@ -30,10 +30,18 @@ def init_auth():
 
 def login_proc(authenticator: stauth.Authenticate):
     # ログイン処理
-    authenticator.login()
+    # authenticator.login()
+    fields = {
+        "Form name": "ログイン",
+        "Login": 'ログイン',
+        "Username": "ユーザ名",
+        "Password": "パスワード"
+    }
+    name, authentication_status, username = authenticator.login(location='main', fields=fields)
 
     if st.session_state["authentication_status"]:
-        authenticator.logout()
+        # authenticator.logout()
+        authenticator.logout(button_name='ログアウト', location='main')
         st.write(f'Enjoy *{st.session_state["name"]}*')
         
         from apps import agent, function_calling, qa, recipe, simple_chat, sql, tagging
